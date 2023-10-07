@@ -54,6 +54,7 @@ export default function LoginScreen() {
               <Text className="font-bold text-2xl">Login</Text>
             </TouchableOpacity > : <ActivityIndicator size={40} color={'red'} />}
           </View>
+          <View></View>
         </View>
       </ScrollView>
     </>
