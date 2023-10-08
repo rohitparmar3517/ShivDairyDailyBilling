@@ -1,11 +1,33 @@
-import { View, Image, StatusBar, Text, ActivityIndicator } from 'react-native'
+import { View, Image, StatusBar, ActivityIndicator } from 'react-native'
 import React from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Splashscreen({ navigation }) {
 
   setTimeout(doSomething, 2500);
-  function doSomething() {
-    navigation.navigate('Login')
+  async function doSomething() {
+    const result = await AsyncStorage.getItem('login');
+    if (result == 'true') {
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: "Home",
+          },
+        ],
+      });
+    }
+    else {
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: "Login",
+          },
+        ],
+      });
+    }
+
   }
   return (
     <>

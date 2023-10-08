@@ -1,25 +1,46 @@
+import axios from 'axios';
 import { View, Text, StatusBar, TextInput, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
 import React, { useState, useRef } from 'react'
 import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function LoginScreen() {
+
+export default function LoginScreen({ navigation }) {
   const [uname, setuname] = useState('');
   const [upassword, setupassword] = useState('');
   const [isLoading, setLoading] = useState(null);
   const password = useRef();
 
-  var onLogin = () => {
+  var onLogin = async () => {
     if (upassword != '' && uname != '') {
       setLoading(true)
-
-      setTimeout(() => {
+      const baseUrl = "http://192.168.0.100/shiv/api/api.php";
+      axios.post(baseUrl, {
+        'email': uname,
+        'password': upassword,
+        'method': 'login',
+      },).then(async res => {
         Toast.show({
           type: 'success',
           text1: 'Login Success',
-
         });
-        setLoading(false)
-      }, 2500);
+        if (res.data.status) {
+          await AsyncStorage.setItem('login', 'true');
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: "Home",
+              },
+            ],
+          });
+        } else {
+          Toast.show({
+            type: 'error',
+            text1: 'Invalid Usarname & Password',
+          });
+        }
+      }).catch(err => console.warn(err));
     }
     else {
       Toast.show({
@@ -27,6 +48,7 @@ export default function LoginScreen() {
         text1: 'Please Enter Usarname & Password',
       });
     }
+    setLoading(false);
   };
   return (
     <>
