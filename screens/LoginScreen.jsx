@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { View, Text, StatusBar, TextInput, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
+import { View, Text, StatusBar, TextInput, Image, TouchableOpacity, ActivityIndicator, ScrollView, Vibration } from 'react-native'
 import React, { useState, useRef } from 'react'
 import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import baseUrl from './const';
 
 
 export default function LoginScreen({ navigation }) {
@@ -12,9 +13,9 @@ export default function LoginScreen({ navigation }) {
   const password = useRef();
 
   var onLogin = async () => {
+    Vibration.vibrate(1)
     if (upassword != '' && uname != '') {
       setLoading(true)
-      const baseUrl = "http://192.168.0.100/shiv/api/api.php";
       axios.post(baseUrl, {
         'email': uname,
         'password': upassword,

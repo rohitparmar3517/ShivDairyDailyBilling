@@ -1,13 +1,16 @@
-import { View, Image, StatusBar, ActivityIndicator } from 'react-native'
+import { View, Image, StatusBar, ActivityIndicator, Vibration } from 'react-native'
 import React from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-message';
 
 export default function Splashscreen({ navigation }) {
 
   setTimeout(doSomething, 2500);
   async function doSomething() {
+    Vibration.vibrate(1)
     const result = await AsyncStorage.getItem('login');
     if (result == 'true') {
+
       navigation.reset({
         index: 0,
         routes: [
@@ -15,6 +18,10 @@ export default function Splashscreen({ navigation }) {
             name: "Home",
           },
         ],
+      });
+      Toast.show({
+        type: 'success',
+        text1: 'Login Success',
       });
     }
     else {
