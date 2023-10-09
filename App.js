@@ -5,6 +5,7 @@ import Splashscreen from './screens/SplashScreen';
 import Toast from 'react-native-toast-message';
 import DashboardScreen from './screens/DashboardScreen';
 import PartyScreen from './screens/PartyScreen';
+import AddPartyScreen from './screens/AddPartyScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ function App() {
           <Stack.Screen name="Login" options={{ headerShown: false, animation: 'fade' }} component={LoginScreen} />
           <Stack.Screen name="Home" options={{ headerShown: false, animation: 'fade' }} component={DashboardScreen} />
           <Stack.Screen name="Party" options={{ animation: 'slide_from_bottom' }} component={PartyScreen} />
+          <Stack.Screen name="AddParty" options={{ animation: 'slide_from_bottom' }} component={AddPartyScreen} />
         </Stack.Navigator>
       </NavigationContainer>
       <Toast />
