@@ -6,4 +6,5 @@ import React from 'react'
 //   return url;
 // }
 
-export default baseUrl = "http://192.168.0.100/shiv/api/api.php"
+// export default baseUrl = "http://192.168.0.100/shiv/api/api.php";
+export default baseUrl = "http://shiv.hitechmorbi.in/api/api.php";

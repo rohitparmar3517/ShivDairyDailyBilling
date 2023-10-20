@@ -44,6 +44,7 @@ export default function PartyScreen({ navigation }) {
       'method': 'alluser',
     }).then(res => {
       setLoading(false)
+      // console.warn(res.data);
       setuser(res.data)
     }).catch(err => {
       setLoading(false)
@@ -73,17 +74,21 @@ export default function PartyScreen({ navigation }) {
         <ActivityIndicator size={75} color={'red'} />
       </View> :
         <View className="flex-1 bg-gray-900">
-          <View className="mt-3 p-2">
+          <View className="mt-3 p-3">
             {user.length == 0 ?
               <View className="w-full h-full justify-center items-center">
                 <Text className="text-center text-white text-2xl">No Record Found</Text></View> :
               <ScrollView bounces={true} className="w-full h-full" refreshControl={<RefreshControl onRefresh={userLoad} />}>
                 {user.map((items) => {
                   return <TouchableOpacity key={items.user_id} onPress={() => {
+                    navigation.navigate('EditParty', {
+                      party: items,
+
+                    });
                   }}>
-                    <View className="bg-white rounded-md flex-row h-16 mb-3 items-center justify-start">
+                    <View className="bg-white rounded-md flex-row h-16 mb-3 pl-3 items-center justify-start">
                       <Icon name='person' size={30} color={'black'} />
-                      <View className="flex-1 flex-row justify-between m-2">
+                      <View className="flex-1 pl-3 flex-row justify-between m-2">
                         <Text numberOfLines={1} className="text-xl text-blue-500 font-bold">{items.name}</Text>
                         {/* <Text numberOfLines={1} className="text-xl text-blue-500 font-bold">{items.guj_name}</Text> */}
                         <TouchableOpacity onPress={() => {
@@ -100,7 +105,6 @@ export default function PartyScreen({ navigation }) {
                               style: 'default',
                             },
                           ])
-
                         }}>
                           <Icon name='delete' size={30} color={'red'} />
                         </TouchableOpacity>

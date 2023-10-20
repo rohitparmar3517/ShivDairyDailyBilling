@@ -43,11 +43,15 @@ export default function DashboardScreen({ navigation }) {
               </View>
             </TouchableOpacity>
 
-            <View className="bg-white p-5 rounded-xl justify-center items-center">
-              <Icon
-                name='person' size={100} color={'green'} />
-              <Text className="text-2xl font-extrabold text-black">Party</Text>
-            </View>
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('Entry')
+            }}>
+              <View className="bg-white p-5 rounded-xl justify-center items-center">
+                <Icon
+                  name='store' size={100} color={'green'} />
+                <Text className="text-2xl font-extrabold text-black">Entry</Text>
+              </View>
+            </TouchableOpacity>
 
             <View className="bg-white p-5 rounded-xl justify-center items-center">
               <Icon
